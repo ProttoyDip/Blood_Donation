@@ -7,20 +7,20 @@ export default function AboutUs() {
       {/* Header Section */}
       <header className="about-header">
         <h1>About Us</h1>
-        <p>Know about Blood Donation. What, how, and why.</p>
+        <p>Know about Pulse of Hope. What, how, and why.</p>
       </header>
 
       <main className="about-container">
         {/* Left Column */}
         <section className="about-left">
           <p>
-            Blood Donation is an automated blood service that connects blood
+            Pulse of Hope is an automated blood service that connects blood
             searchers with voluntary blood donors in a moment through SMS and
-            website. Blood Donation is a free service for all. Blood Donation
+            website. Pulse of Hope is a free service for all. Pulse of Hope
             started its journey in 2018.
           </p>
 
-          <h2>Why Blood Donation?</h2>
+          <h2>Why Pulse of Hope?</h2>
           <p>
             Though Bangladesh has more than 160 million people, the number of
             safe blood banks is very few. Without divisional towns, there is
@@ -32,11 +32,11 @@ export default function AboutUs() {
             communication gap is resulting in the loss of many lives.
           </p>
           <p>
-            Blood Donation comes into the scenario to reduce or minimize the
+            Pulse of Hope comes into the scenario to reduce or minimize the
             communication gap and connects people in a moment using the amazing
-            power of SMS and email. As Blood Donation services can also be
+            power of SMS and email. As Pulse of Hope services can also be
             availed by SMS, people from any class of the society can easily
-            avail of Blood Donation services.
+            avail of Pulse of Hope services.
           </p>
         </section>
 
