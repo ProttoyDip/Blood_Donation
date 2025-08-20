@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles.css"; // <-- fixed import path
+import { Mail, Phone } from "lucide-react"; // icons
+import "../styles.css";
 
 export default function AboutUs() {
   return (
@@ -65,6 +66,52 @@ export default function AboutUs() {
           </ul>
         </aside>
       </main>
+
+      {/* Contact Us Section */}
+      <section className="contact-section">
+        <h2>Contact Us</h2>
+        <div className="contact-list">
+          <div className="contact-card">
+            <h3>Prottoy Saha Dip</h3>
+            <p>
+              <Mail size={16} className="icon" />{" "}
+              <a href="mailto:prottoy.cse.20230104108@aust.edu">
+                prottoy.cse.20230104108@aust.edu
+              </a>
+            </p>
+            <p>
+              <Phone size={16} className="icon" />{" "}
+              <a href="tel:01648075015">01648075015</a>
+            </p>
+          </div>
+          <div className="contact-card">
+            <h3>S.M. Sao Mio Rashid Sakin</h3>
+            <p>
+              <Mail size={16} className="icon" />{" "}
+              <a href="mailto:rashid.cse.20230104102@aust.edu">
+                rashid.cse.20230104102@aust.edu
+              </a>
+            </p>
+            <p>
+              <Phone size={16} className="icon" />{" "}
+              <a href="tel:01968776048">01968776048</a>
+            </p>
+          </div>
+          <div className="contact-card">
+            <h3>Md. Thouhidul Islam</h3>
+            <p>
+              <Mail size={16} className="icon" />{" "}
+              <a href="mailto:thouhidul.cse.20230104106@aust.edu">
+                thouhidul.cse.20230104106@aust.edu
+              </a>
+            </p>
+            <p>
+              <Phone size={16} className="icon" />{" "}
+              <a href="tel:01768298683">01768-298683</a>
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
