@@ -1,16 +1,21 @@
 import React from "react";
-import { Mail, Phone } from "lucide-react"; // icons
+import { Mail, Phone } from "lucide-react";
+import Navbar from "../Navbar"; // Navbar Component
 import "../styles.css";
 
 export default function AboutUs() {
   return (
     <div className="about-page">
+      {/* Navbar */}
+      <Navbar />
+
       {/* Header Section */}
       <header className="about-header">
         <h1>About Us</h1>
         <p>Know about Pulse of Hope. What, how, and why.</p>
       </header>
 
+      {/* Main Section */}
       <main className="about-container">
         {/* Left Column */}
         <section className="about-left">
@@ -60,9 +65,7 @@ export default function AboutUs() {
               Enabling people to place blood requests via SMS, website, or
               Facebook
             </li>
-            <li>
-              Connecting voluntary blood donors via SMS or email
-            </li>
+            <li>Connecting voluntary blood donors via SMS or email</li>
           </ul>
         </aside>
       </main>
