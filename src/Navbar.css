@@ -1,64 +1,143 @@
 .navbar {
-  background: #e62e2e; /* red background */
-  color: white;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #e63946 0%, #457b9d 100%);
+  padding: 0.7rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  position: relative;
+  z-index: 100;
 }
 
 .navbar-logo {
-  font-size: 22px;
+  display: flex;
+  align-items: center;
+  font-size: 1.7rem;
   font-weight: bold;
-  letter-spacing: 1px;
+  color: #fff;
+  letter-spacing: 2px;
+  gap: 0.5rem;
 }
 
+.logo-icon {
+  margin-right: 0.5rem;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* ✅ Both PULSE and HOPE are white */
 .pulse {
-  font-weight: 800;
+  color: #fff;
+  font-weight: 700;
 }
 
 .hope {
-  font-style: italic;
+  color: #fff;
+  font-weight: 700;
 }
 
-.nav-links {
-  list-style: none;
+.navbar-links {
   display: flex;
-  gap: 25px;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  transition: all 0.3s;
 }
 
-.nav-links li a {
+.navbar-links li a {
+  color: #fff;
   text-decoration: none;
-  color: white;
+  font-size: 1.1rem;
   font-weight: 500;
-  transition: 0.3s;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
 }
 
-.nav-links li a:hover {
-  color: #ffd6d6;
+.navbar-links li a:hover,
+.navbar-links li a:focus {
+  background: #fff;
+  color: #e63946;
+  box-shadow: 0 2px 8px #e6394633;
 }
 
-/* Hamburger menu */
-.hamburger {
+.navbar-toggle {
   display: none;
-  flex-direction: column;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
   cursor: pointer;
 }
 
-.hamburger span {
-  height: 3px;
-  width: 25px;
-  background: white;
-  margin: 4px;
-  border-radius: 5px;
+.navbar-hamburger {
+  display: block;
 }
 
-/* Responsive */
+.navbar-close {
+  display: none;
+}
+
+/* -------------------------
+   Mobile styles
+-------------------------- */
 @media (max-width: 768px) {
-  .nav-links {
+  .navbar-links {
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #fff;
+    width: 220px;
+    box-shadow: 0 2px 16px #0002;
+    padding: 1.5rem 1rem 1rem 1rem;
+    border-radius: 0 0 0 16px;
     display: none;
+    z-index: 200;
+    animation: slideIn 0.3s;
   }
-  .hamburger {
+
+  .navbar-links.active {
     display: flex;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; right: -220px; }
+    to { opacity: 1; right: 0; }
+  }
+
+  .navbar-links li a {
+    color: #e63946;
+    background: none;
+    font-size: 1.15rem;
+    margin-bottom: 0.7rem;
+    border-radius: 8px;
+  }
+
+  .navbar-links li a:hover {
+    background: #e63946;
+    color: #fff;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar-close {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #e63946;
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    cursor: pointer;
+    z-index: 210;
   }
 }
