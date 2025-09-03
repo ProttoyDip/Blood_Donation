@@ -1,14 +1,10 @@
 import React from "react";
 import { Mail, Phone } from "lucide-react";
-import Navbar from "../Navbar"; // Navbar Component
 import "../styles.css";
 
 export default function AboutUs() {
   return (
     <div className="about-page">
-      {/* Navbar */}
-      <Navbar />
-
       {/* Header Section */}
       <header className="about-header">
         <h1>About Us</h1>

@@ -5,20 +5,6 @@ import { gsap } from "gsap";
 
 const themeRed = "#ef2b2d";
 
-const navLinkStyle = {
-  color: "#fff",
-  textDecoration: "none",
-  fontSize: 18,
-  fontWeight: 500,
-  marginRight: 24,
-  transition: "color 0.2s, font-weight 0.2s"
-};
-
-const navLinkActiveStyle = {
-  fontWeight: 700,
-  textDecoration: "underline"
-};
-
 // Make sure to use named export if you are importing as { Login } elsewhere,
 // or default export if you are importing as Login elsewhere.
 // The following is a default export, so in your App.js or Router use:
@@ -73,6 +59,92 @@ export default function Login() {
     { label: "Login", href: "/login" }
   ];
 
+  // Add eye icon SVGs
+  const EyeIcon = ({ open }) => (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: 28,
+        height: 28,
+        borderRadius: "50%",
+        background: open
+          ? "linear-gradient(135deg, #ef2b2d 60%, #ff6a00 100%)"
+          : "linear-gradient(135deg, #bbb 60%, #ef2b2d 100%)",
+        boxShadow: open
+          ? "0 0 8px 2px #ef2b2d88, 0 0 0 4px #fff"
+          : "0 0 6px 1px #bbb8",
+        transition: "background 0.3s, box-shadow 0.3s",
+        cursor: "pointer",
+        border: open ? "2px solid #fff" : "2px solid #eee"
+      }}
+      tabIndex={0}
+      aria-label={open ? "Hide password" : "Show password"}
+    >
+      {open ? (
+        // Eye open SVG
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <ellipse cx="10" cy="10" rx="7" ry="5" stroke="#fff" strokeWidth="2" />
+          <circle cx="10" cy="10" r="2.5" fill="#fff" />
+        </svg>
+      ) : (
+        // Eye closed SVG
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <ellipse cx="10" cy="10" rx="7" ry="5" stroke="#fff" strokeWidth="2" />
+          <line x1="5" y1="15" x2="15" y2="5" stroke="#fff" strokeWidth="2" />
+        </svg>
+      )}
+    </span>
+  );
+
+  // Define a consistent style for input fields and buttons
+  const inputColStyle = {
+    width: "100%",
+    maxWidth: 360,
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  };
+  const inputStyle = {
+    width: "100%",
+    maxWidth: 360,
+    padding: "12px 48px 12px 16px",
+    fontSize: 16,
+    border: "1px solid #bbb",
+    borderRadius: 8,
+    outline: "none",
+    marginBottom: 0,
+    background: "#fff",
+    transition: "box-shadow 0.2s",
+    boxSizing: "border-box"
+  };
+  const labelStyle = {
+    display: "block",
+    fontSize: 16,
+    fontWeight: 500,
+    marginBottom: 8,
+    color: "#222",
+    width: "100%",
+    textAlign: "left"
+  };
+  const buttonStyle = {
+    width: "100%",
+    maxWidth: 360,
+    padding: "12px 32px",
+    background: themeRed,
+    color: "#fff",
+    border: "none",
+    borderRadius: 8,
+    fontSize: 16,
+    fontWeight: 600,
+    boxShadow: "0 8px 32px 0 rgba(239,43,45,0.18)",
+    cursor: "pointer",
+    marginTop: 8,
+    transition: "background 0.2s"
+  };
+
   return (
     <div
       style={{
@@ -86,110 +158,6 @@ export default function Login() {
         padding: "0",
       }}
     >
-      {/* Navigation Bar */}
-      <div style={{ background: themeRed, color: "#fff", minHeight: 80, width: "100%", position: "relative" }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", height: 80, justifyContent: "space-between", position: "relative" }}>
-          {/* Logo text */}
-          <div style={{
-            fontSize: 36,
-            fontWeight: 700,
-            marginRight: 40,
-            letterSpacing: 2,
-            fontFamily: "'Poppins', sans-serif",
-            textTransform: "uppercase",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center"
-          }}>
-            <span style={{
-              color: "#fff",
-              fontWeight: 900,
-              fontSize: 38,
-              letterSpacing: 3,
-              textShadow: "0 2px 8px rgba(239,43,45,0.10)",
-              fontFamily: "'Poppins', sans-serif"
-            }}>
-              Pulse
-            </span>
-            <span style={{
-              color: "#fff",
-              fontWeight: 400,
-              fontSize: 28,
-              marginLeft: 8,
-              letterSpacing: 2,
-              opacity: 0.85,
-              fontStyle: "italic",
-              fontFamily: "'Poppins', sans-serif"
-            }}>
-              of Hope
-            </span>
-          </div>
-          {/* Hamburger menu icon */}
-          <button
-            aria-label="Open menu"
-            onClick={() => setMenuOpen((v) => !v)}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#fff",
-              fontSize: 38,
-              cursor: "pointer",
-              zIndex: 102,
-              padding: 8,
-              display: "flex",
-              alignItems: "center"
-            }}
-          >
-            <span style={{
-              transition: "transform 0.3s",
-              transform: menuOpen ? "rotate(90deg)" : "none"
-            }}>☰</span>
-          </button>
-          {/* Slide-down menu */}
-          <div
-            ref={menuRef}
-            style={{
-              position: "absolute",
-              top: 80,
-              left: 0,
-              width: "100%",
-              background: themeRed,
-              boxShadow: menuOpen ? "0 8px 32px 0 rgba(239,43,45,0.18)" : "none",
-              zIndex: 101,
-              display: menuOpen ? "flex" : "none",
-              flexDirection: "column",
-              alignItems: "center",
-              transition: "max-height 0.3s, opacity 0.3s",
-              maxHeight: menuOpen ? "400px" : "0",
-              opacity: menuOpen ? 1 : 0,
-              overflow: "hidden"
-            }}
-          >
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                style={{
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontSize: 22,
-                  fontWeight: 500,
-                  padding: "18px 0",
-                  width: "100%",
-                  textAlign: "center",
-                  transition: "background 0.2s, color 0.2s",
-                  background: "none"
-                }}
-                onClick={() => setMenuOpen(false)}
-                onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.08)"}
-                onMouseOut={e => e.currentTarget.style.background = "none"}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
       {/* Main Content */}
       <div style={{
         display: "flex",
@@ -204,18 +172,6 @@ export default function Login() {
         width: "100%",
         justifyContent: "center"
       }}>
-        {/* App Logo above social login */}
-        <div style={{
-          width: "100%",
-          textAlign: "center",
-          marginBottom: 24
-        }}>
-          <img
-            src={process.env.PUBLIC_URL + "/pulseofhope-logo.png"}
-            alt="App Logo"
-            style={{ width: 80, height: 80, marginBottom: 16, objectFit: "contain" }}
-          />
-        </div>
         {/* Left: Social Login */}
         <div style={{
           flex: 1,
@@ -227,7 +183,7 @@ export default function Login() {
         }}>
           <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 8 }}>Login with<br />Social Platforms</h2>
           <div style={{ fontSize: 16, color: "#444", marginTop: 24 }}>
-            <div style={{ display: "flex", gap: 16 }}>
+            <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
               <button
                 style={{
                   background: "#DB4437",
@@ -291,25 +247,16 @@ export default function Login() {
           flexDirection: "column",
           justifyContent: "center"
         }}>
-          <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 24 }}>Login</h2>
-          <form onSubmit={handleLogin}>
-            <div style={{ marginBottom: 20 }}>
-              <label style={{ display: "block", fontSize: 16, fontWeight: 500, marginBottom: 8, color: "#222" }}>Email</label>
+          <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 24, textAlign: "center" }}>Login</h2>
+          <form onSubmit={handleLogin} style={inputColStyle}>
+            <div style={{ marginBottom: 20, width: "100%" }}>
+              <label style={labelStyle}>Email</label>
               <input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "12px 16px",
-                  fontSize: 16,
-                  border: "1px solid #bbb",
-                  borderRadius: 6,
-                  outline: "none",
-                  marginBottom: 0,
-                  background: "#fff"
-                }}
+                style={{ ...inputStyle, paddingRight: 16 }}
               />
               {invalidEmail && (
                 <div style={{ color: themeRed, marginTop: 6, fontSize: 14 }}>
@@ -317,23 +264,14 @@ export default function Login() {
                 </div>
               )}
             </div>
-            <div style={{ marginBottom: 20, position: "relative" }}>
-              <label style={{ display: "block", fontSize: 16, fontWeight: 500, marginBottom: 8, color: "#222" }}>Password</label>
+            <div style={{ marginBottom: 20, width: "100%", position: "relative" }}>
+              <label style={labelStyle}>Password</label>
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "12px 16px",
-                  fontSize: 16,
-                  border: "1px solid #bbb",
-                  borderRadius: 6,
-                  outline: "none",
-                  marginBottom: 0,
-                  background: "#fff"
-                }}
+                style={inputStyle}
               />
               <button
                 type="button"
@@ -341,16 +279,30 @@ export default function Login() {
                 style={{
                   position: "absolute",
                   right: 10,
-                  top: "50%",
-                  transform: "translateY(-50%)",
+                  top: 38,
                   background: "none",
                   border: "none",
+                  padding: 0,
+                  margin: 0,
                   cursor: "pointer",
-                  color: themeRed,
-                  fontSize: 14
+                  outline: "none",
+                  zIndex: 2,
+                  transition: "box-shadow 0.2s"
+                }}
+                tabIndex={0}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                onMouseOver={e => {
+                  e.currentTarget.firstChild.style.boxShadow =
+                    "0 0 12px 2px #ff6a00cc, 0 0 0 4px #fff";
+                }}
+                onMouseOut={e => {
+                  e.currentTarget.firstChild.style.boxShadow =
+                    showPassword
+                      ? "0 0 8px 2px #ef2b2d88, 0 0 0 4px #fff"
+                      : "0 0 6px 1px #bbb8";
                 }}
               >
-                {showPassword ? "Hide" : "Show"}
+                <EyeIcon open={showPassword} />
               </button>
               {invalidPassword && (
                 <div style={{ color: themeRed, marginTop: 6, fontSize: 14 }}>
@@ -361,7 +313,8 @@ export default function Login() {
             <div style={{
               marginBottom: 20,
               display: "flex",
-              alignItems: "center"
+              alignItems: "center",
+              width: "100%"
             }}>
               <input type="checkbox" id="remember" style={{ marginRight: 8 }} />
               <label htmlFor="remember" style={{ fontSize: 14 }}>
@@ -370,24 +323,11 @@ export default function Login() {
             </div>
             <button
               type="submit"
-              style={{
-                width: "100%",
-                padding: "10px 32px",
-                background: themeRed,
-                color: "#fff",
-                border: "none",
-                borderRadius: 8,
-                fontSize: 16,
-                fontWeight: 600,
-                boxShadow: "0 8px 32px 0 rgba(239,43,45,0.18)",
-                cursor: "pointer",
-                marginTop: 8,
-                transition: "background 0.2s"
-              }}
+              style={buttonStyle}
             >
               {loading ? "Logging in..." : "Log In"}
             </button>
-            <div style={{ marginTop: 16, textAlign: "center" }}>
+            <div style={{ marginTop: 16, textAlign: "center", width: "100%" }}>
               <a
                 href="/forgot-password"
                 style={{
@@ -399,7 +339,7 @@ export default function Login() {
                 Forgot your password?
               </a>
             </div>
-            <div style={{ marginTop: 16, textAlign: "center" }}>
+            <div style={{ marginTop: 16, textAlign: "center", width: "100%" }}>
               <a
                 href="/register"
                 style={{
@@ -414,6 +354,35 @@ export default function Login() {
           </form>
         </div>
       </div>
+      {/* Responsive style for eye icon and input alignment */}
+      <style>
+        {`
+        @media (max-width: 900px) {
+          form, .input-col {
+            max-width: 98vw !important;
+            min-width: 0 !important;
+          }
+        }
+        @media (max-width: 600px) {
+          form, .input-col {
+            max-width: 100vw !important;
+            min-width: 0 !important;
+            padding: 0 8vw !important;
+          }
+          input[type="password"], input[type="text"], input[type="email"] {
+            font-size: 15px !important;
+            padding-right: 44px !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+          }
+          button[type="submit"] {
+            min-width: 0 !important;
+            max-width: 100% !important;
+          }
+        }
+        `}
+      </style>
     </div>
   );
 }
+

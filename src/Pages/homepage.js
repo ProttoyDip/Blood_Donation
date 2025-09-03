@@ -37,6 +37,14 @@ function useInView(threshold = 0.15) {
 }
 
 export default function Homepage() {
+  const searchDonorsRef = useRef(null); // Reference for the "Search Donors" section
+
+  const scrollToSearchDonors = () => {
+    if (searchDonorsRef.current) {
+      searchDonorsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   // Animation hooks for each block
   const [smsRef, smsInView] = useInView();
   const [searchRef, searchInView] = useInView();
@@ -67,142 +75,8 @@ export default function Homepage() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [menuOpen]);
 
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "Search Donors", href: "/donors" },
-    { label: "Add Blood Request", href: "/add-request" },
-    { label: "Register", href: "/register" },
-    { label: "Login", href: "/login" }
-  ];
-
   return (
     <div style={{ fontFamily: "Poppins, sans-serif", background: "#fff", minHeight: "100vh", overflowY: "auto" }}>
-      {/* Navigation Bar */}
-      <div style={{ background: themeRed, color: "#fff", minHeight: 80, width: "100%", position: "relative" }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", height: 80, justifyContent: "space-between", position: "relative" }}>
-          {/* Logo text */}
-          <div style={{
-            fontSize: 36,
-            fontWeight: 700,
-            marginRight: 40,
-            letterSpacing: 2,
-            fontFamily: "'Poppins', sans-serif",
-            textTransform: "uppercase",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center"
-          }}>
-            <span style={{
-              color: "#fff",
-              fontWeight: 900,
-              fontSize: 38,
-              letterSpacing: 3,
-              textShadow: "0 2px 8px rgba(239,43,45,0.10)",
-              fontFamily: "'Poppins', sans-serif"
-            }}>
-              Pulse
-            </span>
-            <span style={{
-              color: "#fff",
-              fontWeight: 400,
-              fontSize: 28,
-              marginLeft: 8,
-              letterSpacing: 2,
-              opacity: 0.85,
-              fontStyle: "italic",
-              fontFamily: "'Poppins', sans-serif"
-            }}>
-              of Hope
-            </span>
-          </div>
-          {/* Hamburger menu icon */}
-          <button
-            aria-label="Toggle menu"
-            onClick={() => setMenuOpen(prev => !prev)}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#fff",
-              fontSize: 38,
-              cursor: "pointer",
-              zIndex: 102,
-              padding: 8,
-              display: "flex",
-              alignItems: "center",
-              transition: "transform 0.3s"
-            }}
-          >
-            <span style={{
-              transition: "transform 0.3s",
-              display: "inline-block"
-            }}>
-              {/* Only show hamburger icon, not cross here */}
-              ☰
-            </span>
-          </button>
-          {/* Slide-down menu */}
-          <div
-            ref={menuRef}
-            style={{
-              position: "absolute",
-              top: 80,
-              left: 0,
-              width: "100%",
-              background: themeRed,
-              boxShadow: menuOpen ? "0 8px 32px 0 rgba(239,43,45,0.18)" : "none",
-              zIndex: 101,
-              display: menuOpen ? "flex" : "none",
-              flexDirection: "column",
-              alignItems: "center",
-              transition: "max-height 0.3s, opacity 0.3s",
-              maxHeight: menuOpen ? "400px" : "0",
-              opacity: menuOpen ? 1 : 0,
-              overflow: "hidden"
-            }}
-          >
-            {/* Small cross button inside menu for closing */}
-            <button
-              aria-label="Close menu"
-              onClick={() => setMenuOpen(false)}
-              style={{
-                background: "none",
-                border: "none",
-                color: "#fff",
-                fontSize: 22,
-                cursor: "pointer",
-                alignSelf: "flex-end",
-                margin: "12px 16px 0 0"
-              }}
-            >
-              ✖️
-            </button>
-            {/* ...existing code for navItems... */}
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                style={{
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontSize: 22,
-                  fontWeight: 500,
-                  padding: "18px 0",
-                  width: "100%",
-                  textAlign: "center",
-                  transition: "background 0.2s, color 0.2s",
-                  background: "none"
-                }}
-                onClick={() => setMenuOpen(false)}
-                onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.08)"}
-                onMouseOut={e => e.currentTarget.style.background = "none"}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
       {/* Banner */}
       <div style={{
         position: "relative",
@@ -242,9 +116,12 @@ export default function Homepage() {
             <Link to="/register" style={{ textDecoration: "none" }}>
               <button style={{ ...bannerBtnRed, minWidth: 170, textAlign: "center" }}>Join as a Donor</button>
             </Link>
-            <Link to="/donors" style={{ textDecoration: "none" }}>
-              <button style={{ ...bannerBtnWhite, minWidth: 170, textAlign: "center" }}>Search Donors</button>
-            </Link>
+            <button
+              onClick={scrollToSearchDonors}
+              style={{ ...bannerBtnWhite, minWidth: 170, textAlign: "center" }}
+            >
+              Search Donors
+            </button>
           </div>
         </div>
         {/* Wave effect behind buttons */}
@@ -547,14 +424,18 @@ export default function Homepage() {
       </div>
 
       {/* --- Search Donors Section --- */}
-      <div style={{
-        width: "100%",
-        background: "#fcfcfc",
-        marginTop: 60,
-        padding: "60px 0 40px 0",
-        borderTop: "1px solid #f3f3f3",
-        borderRadius: "0 0 16px 16px"
-      }}>
+      <div
+        ref={searchDonorsRef} // Attach the reference to the "Search Donors" section
+        data-search-donors // Add this attribute for navigation
+        style={{
+          width: "100%",
+          background: "#fcfcfc",
+          marginTop: 60,
+          padding: "60px 0 40px 0",
+          borderTop: "1px solid #f3f3f3",
+          borderRadius: "0 0 16px 16px"
+        }}
+      >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <h2 style={{ textAlign: "center", fontWeight: 700, fontSize: 26, marginBottom: 32 }}>Search Donors</h2>
           <form style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>

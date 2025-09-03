@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { HeartPulse } from "lucide-react"; // attractive icon
 import "./Navbar.css"; // custom styles
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
+    { label: "Add Blood Request", href: "/add-request" }, // New option
+    { label: "Register", href: "/register" },
+    { label: "Login", href: "/login" }
+  ];
 
   return (
     <nav className="navbar">
@@ -28,10 +37,13 @@ export default function Navbar() {
         >
           &times;
         </button>
-        <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
-        <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
-        <li><Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link></li>
-        <li><Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link></li>
+        {navItems.map((item) => (
+          <li key={item.label}>
+            <Link to={item.href} onClick={() => setMenuOpen(false)}>
+              {item.label}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
