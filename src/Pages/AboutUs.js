@@ -1,23 +1,23 @@
 import React from "react";
 import { Mail, Phone } from "lucide-react";
-import Navbar from "../Navbar"; // Navbar Component
+import Navbar from "../Navbar"; 
 import "../styles.css";
 
 export default function AboutUs() {
   return (
     <div className="about-page">
-      {/* Navbar */}
+     
       <Navbar />
 
-      {/* Header Section */}
+     
       <header className="about-header">
         <h1>About Us</h1>
         <p>Know about Pulse of Hope. What, how, and why.</p>
       </header>
 
-      {/* Main Section */}
+      
       <main className="about-container">
-        {/* Left Column */}
+   
         <section className="about-left">
           <p>
             Pulse of Hope is an automated blood service that connects blood
@@ -46,7 +46,7 @@ export default function AboutUs() {
           </p>
         </section>
 
-        {/* Right Column */}
+       
         <aside className="about-right">
           <h3>Vision</h3>
           <p>Ensuring no more death just for the need of blood</p>
@@ -70,7 +70,7 @@ export default function AboutUs() {
         </aside>
       </main>
 
-      {/* Contact Us Section */}
+      
       <section className="contact-section">
         <h2>Contact Us</h2>
         <div className="contact-list">

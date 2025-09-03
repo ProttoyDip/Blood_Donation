@@ -1,260 +1,147 @@
-import React, { useState, useEffect, useRef } from "react";
-import ResponsiveLayout from "./responsiveLayout";
-
-const themeRed = "#ef2b2d";
+import React, { useState } from "react";
+import Navbar from "../Navbar"; 
+import "../styles.css"; 
 
 export default function Register() {
-  const [password, setPassword] = useState("");
-  const [invalid, setInvalid] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    bloodGroup: "",
+    district: "",
+    dateOfBirth: "",
+    gender: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-  useEffect(() => {
-    if (!menuOpen) return;
-    function handleClick(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [menuOpen]);
+  const [errors, setErrors] = useState({});
+
+  const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+  const districts = [
+    "Bagerhat", "Bandarban", "Barguna", "Barisal", "Bhola", "Bogra", "Brahmanbaria",
+    "Chandpur", "Chapai Nawabganj", "Chattogram", "Chuadanga", "Comilla", "Cox's Bazar",
+    "Dhaka", "Dinajpur", "Faridpur", "Feni", "Gaibandha", "Gazipur", "Gopalganj",
+    "Habiganj", "Jamalpur", "Jashore", "Jhalokathi", "Jhenaidah", "Joypurhat",
+    "Khagrachari", "Khulna", "Kishoreganj", "Kurigram", "Kushtia", "Lakshmipur",
+    "Lalmonirhat", "Madaripur", "Magura", "Manikganj", "Meherpur", "Moulvibazar",
+    "Munshiganj", "Mymensingh", "Naogaon", "Narail", "Narayanganj", "Narsingdi",
+    "Natore", "Netrokona", "Nilphamari", "Noakhali", "Pabna", "Panchagarh",
+    "Patualkhali", "Pirojpur", "Rajbari", "Rajshahi", "Rangamati", "Rangpur",
+    "Satkhira", "Shariatpur", "Sherpur", "Sirajganj", "Sunamganj", "Sylhet",
+    "Tangail", "Thakurgaon"
+  ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password.length < 8 || password.length > 12) {
-      setInvalid(true);
-      return;
+    const newErrors = {};
+
+    if (!formData.fullName) newErrors.fullName = "Full Name is required.";
+    if (!formData.email) newErrors.email = "Email is required.";
+    if (!formData.phone) newErrors.phone = "Phone Number is required.";
+    if (!formData.bloodGroup) newErrors.bloodGroup = "Blood Group is required.";
+    if (!formData.district) newErrors.district = "District is required.";
+    if (!formData.dateOfBirth) newErrors.dateOfBirth = "Date of Birth is required.";
+    if (!formData.gender) newErrors.gender = "Gender is required.";
+    if (!formData.password) newErrors.password = "Password is required.";
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match.";
     }
-    setInvalid(false);
-    // ...submit logic...
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Form submitted successfully:", formData);
+      // TODO: API call here
+    }
   };
 
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "Search Donors", href: "/donors" },
-    { label: "Add Blood Request", href: "/add-request" },
-    { label: "Register", href: "/register" },
-    { label: "Login", href: "/login" }
-  ];
-
   return (
-    <div
-      style={{
-        fontFamily: "Poppins, sans-serif",
-        minHeight: "100vh",
-        background: "linear-gradient(135deg, #fde2e2 0%, #ef2b2d 100%)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        padding: "0",
-      }}
-    >
-      {/* Navigation Bar */}
-      <div style={{ background: themeRed, color: "#fff", minHeight: 80, width: "100%", position: "relative" }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", height: 80, justifyContent: "space-between", position: "relative" }}>
-          {/* Logo text */}
-          <div style={{
-            fontSize: 36,
-            fontWeight: 700,
-            marginRight: 40,
-            letterSpacing: 2,
-            fontFamily: "'Poppins', sans-serif",
-            textTransform: "uppercase",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center"
-          }}>
-            <span style={{
-              color: "#fff",
-              fontWeight: 900,
-              fontSize: 38,
-              letterSpacing: 3,
-              textShadow: "0 2px 8px rgba(239,43,45,0.10)",
-              fontFamily: "'Poppins', sans-serif"
-            }}>
-              Pulse
-            </span>
-            <span style={{
-              color: "#fff",
-              fontWeight: 400,
-              fontSize: 28,
-              marginLeft: 8,
-              letterSpacing: 2,
-              opacity: 0.85,
-              fontStyle: "italic",
-              fontFamily: "'Poppins', sans-serif"
-            }}>
-              of Hope
-            </span>
-          </div>
-          {/* Hamburger menu icon */}
-          <button
-            aria-label="Open menu"
-            onClick={() => setMenuOpen((v) => !v)}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#fff",
-              fontSize: 38,
-              cursor: "pointer",
-              zIndex: 102,
-              padding: 8,
-              display: "flex",
-              alignItems: "center"
-            }}
-          >
-            <span style={{
-              transition: "transform 0.3s",
-              transform: menuOpen ? "rotate(90deg)" : "none"
-            }}>☰</span>
-          </button>
-          {/* Slide-down menu */}
-          <div
-            ref={menuRef}
-            style={{
-              position: "absolute",
-              top: 80,
-              left: 0,
-              width: "100%",
-              background: themeRed,
-              boxShadow: menuOpen ? "0 8px 32px 0 rgba(239,43,45,0.18)" : "none",
-              zIndex: 101,
-              display: menuOpen ? "flex" : "none",
-              flexDirection: "column",
-              alignItems: "center",
-              transition: "max-height 0.3s, opacity 0.3s",
-              maxHeight: menuOpen ? "400px" : "0",
-              opacity: menuOpen ? 1 : 0,
-              overflow: "hidden"
-            }}
-          >
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                style={{
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontSize: 22,
-                  fontWeight: 500,
-                  padding: "18px 0",
-                  width: "100%",
-                  textAlign: "center",
-                  transition: "background 0.2s, color 0.2s",
-                  background: "none"
-                }}
-                onClick={() => setMenuOpen(false)}
-                onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.08)"}
-                onMouseOut={e => e.currentTarget.style.background = "none"}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-      {/* Banner */}
-      <div style={{
-        background: "#fde2e2",
-        padding: "60px 0 80px 0",
-        marginBottom: -60,
-        boxShadow: "0 8px 32px 0 rgba(239,43,45,0.08)",
-        clipPath: "polygon(0 0, 100% 0, 100% 80%, 0 100%)"
-      }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <h1 style={{ fontSize: 38, fontWeight: 700, margin: 0 }}>Register with Pulse of Hope</h1>
-          <p style={{ fontSize: 16, marginTop: 16, color: "#222" }}>
-            Register with us to avail all the features.
-          </p>
-        </div>
-      </div>
-      {/* Main Content */}
-      <div style={{
-        display: "flex",
-        maxWidth: 1200,
-        margin: "60px auto 0 auto",
-        background: "#fff",
-        borderRadius: 16,
-        boxShadow: "0 4px 32px 0 rgba(0,0,0,0.04)",
-        padding: "60px 0 80px 0",
-        minHeight: 400
-      }}>
-        {/* Left: Social Register */}
-        <div style={{ flex: 1, padding: "0 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 8 }}>Register with<br />Social Platforms</h2>
-          <div style={{ fontSize: 16, color: "#444", marginTop: 24 }}>
-            {/* Social login buttons can go here */}
-          </div>
-        </div>
-        {/* Right: Register with Mobile */}
-        <div style={{ flex: 1, padding: "0 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 8 }}>Register with<br />Mobile</h2>
-          <form onSubmit={handleSubmit}>
-            <div style={{ marginBottom: 20 }}>
-              <label style={labelStyle}>Mobile</label>
-              <input type="text" placeholder="Mobile" style={inputStyle} />
+    <>
+      <Navbar />
+      <div className="register-page page-container">   {/* ✅ updated wrapper */}
+        <div className="form-card">
+          <h2 className="form-title">Donor Registration</h2>
+
+          <form onSubmit={handleSubmit} className="form">
+            <input 
+              type="text" name="fullName" placeholder="Full Name"
+              value={formData.fullName} onChange={handleChange} className="form-input" 
+            />
+            {errors.fullName && <span className="error-text">{errors.fullName}</span>}
+
+            <input 
+              type="email" name="email" placeholder="Email Address"
+              value={formData.email} onChange={handleChange} className="form-input" 
+            />
+            {errors.email && <span className="error-text">{errors.email}</span>}
+
+            <input 
+              type="text" name="phone" placeholder="Phone Number"
+              value={formData.phone} onChange={handleChange} className="form-input" 
+            />
+            {errors.phone && <span className="error-text">{errors.phone}</span>}
+
+            <select 
+              name="bloodGroup" value={formData.bloodGroup} onChange={handleChange} className="form-input"
+            >
+              <option value="" disabled>Select Blood Group</option>
+              {bloodGroups.map((group) => (
+                <option key={group} value={group}>{group}</option>
+              ))}
+            </select>
+            {errors.bloodGroup && <span className="error-text">{errors.bloodGroup}</span>}
+
+            <select 
+              name="district" value={formData.district} onChange={handleChange} className="form-input"
+            >
+              <option value="" disabled>Select District</option>
+              {districts.map((d) => (
+                <option key={d} value={d}>{d}</option>
+              ))}
+            </select>
+            {errors.district && <span className="error-text">{errors.district}</span>}
+
+            <input 
+              type="date" name="dateOfBirth"
+              value={formData.dateOfBirth} onChange={handleChange} className="form-input" 
+            />
+            {errors.dateOfBirth && <span className="error-text">{errors.dateOfBirth}</span>}
+
+            {/* Gender */}
+            <div className="form-radio">
+              {["Male", "Female", "Other"].map((g) => (
+                <label key={g}>
+                  <input 
+                    type="radio" name="gender" value={g}
+                    checked={formData.gender === g} onChange={handleChange} 
+                  /> {g}
+                </label>
+              ))}
             </div>
-            <div style={{ marginBottom: 20 }}>
-              <label style={labelStyle}>Email</label>
-              <input type="email" placeholder="Email" style={inputStyle} />
-            </div>
-            <div style={{ marginBottom: 20 }}>
-              <label style={labelStyle}>Password</label>
-              <input
-                type="password"
-                placeholder="Password (8-12 characters)"
-                style={inputStyle}
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                minLength={8}
-                maxLength={12}
-              />
-            </div>
-            <button type="submit" style={registerBtnStyle}>Register</button>
-            {invalid && (
-              <div style={{ color: themeRed, marginTop: 12, fontWeight: 500, textAlign: "center" }}>
-                Password must be 8-12 characters
-              </div>
-            )}
+            {errors.gender && <span className="error-text">{errors.gender}</span>}
+
+            <input 
+              type="password" name="password" placeholder="Password"
+              value={formData.password} onChange={handleChange} className="form-input" 
+            />
+            {errors.password && <span className="error-text">{errors.password}</span>}
+
+            <input 
+              type="password" name="confirmPassword" placeholder="Confirm Password"
+              value={formData.confirmPassword} onChange={handleChange} className="form-input" 
+            />
+            {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
+
+            <button type="submit" className="submit-btn">Register</button>
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
-
-const labelStyle = {
-  display: "block",
-  fontSize: 16,
-  fontWeight: 500,
-  marginBottom: 8,
-  color: "#222"
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "12px 16px",
-  fontSize: 16,
-  border: "1px solid #bbb",
-  borderRadius: 6,
-  outline: "none",
-  marginBottom: 0,
-  background: "#fff"
-};
-
-const registerBtnStyle = {
-  background: themeRed,
-  color: "#fff",
-  border: "none",
-  borderRadius: 8,
-  padding: "10px 32px",
-  fontSize: 16,
-  fontWeight: 600,
-  boxShadow: "0 8px 32px 0 rgba(239,43,45,0.18)",
-  cursor: "pointer",
-  marginTop: 8,
-  transition: "background 0.2s"
-};
