@@ -1,6 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ResponsiveLayout from "./responsiveLayout";
+import Navbar from "../Navbar"; 
+import "../styles.css";
+
 
 const themeRed = "#ef2b2d";
 
@@ -18,7 +21,7 @@ const navLinkActiveStyle = {
 };
 
 const bannerBg =
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"; // Placeholder
+  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"; 
 
 function useInView(threshold = 0.15) {
   const ref = useRef();
@@ -37,7 +40,11 @@ function useInView(threshold = 0.15) {
 }
 
 export default function Homepage() {
+<<<<<<< HEAD
+  const searchDonorsRef = useRef(null); 
+=======
   const searchDonorsRef = useRef(null); // Reference for the "Search Donors" section
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
 
   const scrollToSearchDonors = () => {
     if (searchDonorsRef.current) {
@@ -45,25 +52,28 @@ export default function Homepage() {
     }
   };
 
+<<<<<<< HEAD
+
+=======
   // Animation hooks for each block
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
   const [smsRef, smsInView] = useInView();
   const [searchRef, searchInView] = useInView();
   const [networkRef, networkInView] = useInView();
   const [tutorialRef, tutorialInView] = useInView();
   const [tutorial2Ref, tutorial2InView] = useInView();
 
-  // Detect mobile device
+
   const isMobile = window.innerWidth <= 900;
 
-  // Active navigation state
+ 
   const [activeNav, setActiveNav] = useState("home");
   const location = useLocation();
 
-  // Menu state for mobile
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
 
-  // Close menu when clicking outside
+
   useEffect(() => {
     if (!menuOpen) return;
     function handleClick(e) {
@@ -77,6 +87,23 @@ export default function Homepage() {
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif", background: "#fff", minHeight: "100vh", overflowY: "auto" }}>
+<<<<<<< HEAD
+    
+      <Navbar />
+      <div
+        style={{
+          position: "relative",
+          background: `url(${bannerBg}) center/cover no-repeat`,
+          minHeight: 420,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          textAlign: "center",
+        }}>
+      <div style={{ position: "relative", zIndex: 3, maxWidth: 700, margin: "0 auto" }}>
+           <h1 style={{
+=======
       {/* Banner */}
       <div style={{
         position: "relative",
@@ -96,6 +123,7 @@ export default function Homepage() {
         }} />
         <div style={{ position: "relative", zIndex: 3, maxWidth: 700, margin: "0 auto" }}>
           <h1 style={{
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
             fontSize: 38,
             fontWeight: 700,
             color: "#fff",
@@ -124,12 +152,12 @@ export default function Homepage() {
             </button>
           </div>
         </div>
-        {/* Wave effect behind buttons */}
+       
         <svg viewBox="0 0 1440 100" style={{ position: "absolute", bottom: -1, left: 0, width: "100%", height: 80, zIndex: 2 }}>
           <path fill="#fff" d="M0,64L48,74.7C96,85,192,107,288,112C384,117,480,107,576,101.3C672,96,768,96,864,101.3C960,107,1056,117,1152,117.3C1248,117,1344,107,1392,101.3L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
         </svg>
       </div>
-      {/* About Section */}
+
       <div style={{
         background: "#fff",
         maxWidth: 1200,
@@ -157,11 +185,14 @@ export default function Homepage() {
             <li>• 24×7 service</li>
             <li>• All data is secured</li>
           </ul>
-          <button style={learnMoreBtn}>Learn More</button>
+         <Link to="/about" style={{ textDecoration: "none" }}>
+  <button style={learnMoreBtn}>Learn More</button>
+        </Link>
+
         </div>
       </div>
 
-      {/* --- Tutorial Section (message/tutorial blocks) --- */}
+    
       {isMobile ? (
         <>
           <div
@@ -211,7 +242,7 @@ export default function Homepage() {
         </>
       ) : null}
 
-      {/* --- SMS Format Section --- */}
+    
       <div
         ref={smsRef}
         style={{
@@ -239,7 +270,6 @@ export default function Homepage() {
           }}
           className="sms-flex-container"
         >
-          {/* Left: Button and Format Table */}
           <div style={{ minWidth: 220, flex: 1 }}>
             <button
               style={{
@@ -300,7 +330,7 @@ export default function Homepage() {
               </table>
             </div>
           </div>
-          {/* Right: Speech Bubble */}
+         
           <div
             style={{
               position: "relative",
@@ -339,7 +369,6 @@ export default function Homepage() {
                 need B+<br />
                 Noakhali 2 24-3-2022
               </span>
-              {/* Speech bubble tail */}
               <div
                 style={{
                   position: "absolute",
@@ -357,7 +386,6 @@ export default function Homepage() {
             </div>
           </div>
         </div>
-        {/* Responsive styles for SMS section */}
         <style>
           {`
             @media (max-width: 768px) {
@@ -422,11 +450,17 @@ export default function Homepage() {
           `}
         </style>
       </div>
+<<<<<<< HEAD
+      <div
+        ref={searchDonorsRef} 
+        data-search-donors 
+=======
 
       {/* --- Search Donors Section --- */}
       <div
         ref={searchDonorsRef} // Attach the reference to the "Search Donors" section
         data-search-donors // Add this attribute for navigation
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
         style={{
           width: "100%",
           background: "#fcfcfc",
@@ -451,7 +485,6 @@ export default function Homepage() {
               <option>O+</option>
               <option>O-</option>
             </select>
-            {/* District */}
             <select style={searchInputStyle} defaultValue="">
               <option value="" disabled>Select District</option>
               <option>Bagerhat</option>
@@ -519,14 +552,12 @@ export default function Homepage() {
               <option>Tangail</option>
               <option>Thakurgaon</option>
             </select>
-            {/* Date */}
             <input
               type="date"
               style={searchInputStyle}
               min={new Date().toISOString().split("T")[0]}
               placeholder="dd/mm/yyyy"
             />
-            {/* Donor Type */}
             <select style={searchInputStyle} defaultValue="all">
               <option value="all">All</option>
               <option value="eligible">Eligible</option>
@@ -535,8 +566,6 @@ export default function Homepage() {
           </form>
         </div>
       </div>
-
-      {/* --- Network Stats Section --- */}
       <div style={{
         width: "100%",
         background: "#fff",
@@ -569,7 +598,6 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-      {/* ...existing code for further sections... */}
     </div>
   );
 }

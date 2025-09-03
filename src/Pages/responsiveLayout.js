@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-// Mobile-first responsive layout using flexible units and media queries
+
 export default function ResponsiveLayout({ children }) {
   const [width, setWidth] = useState(window.innerWidth);
   const [navOpen, setNavOpen] = useState(false);
@@ -20,7 +20,7 @@ export default function ResponsiveLayout({ children }) {
     };
     window.addEventListener("resize", handleResize);
 
-    // Listen for route changes
+   
     const handleRoute = () => setActiveRoute(window.location.pathname);
     window.addEventListener("popstate", handleRoute);
 
@@ -40,7 +40,6 @@ export default function ResponsiveLayout({ children }) {
   const isTablet = width > 768 && width <= 1024;
   const isDesktop = width > 1024;
 
-  // Navigation items
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About Us", href: "/about" },
@@ -64,7 +63,7 @@ export default function ResponsiveLayout({ children }) {
         maxWidth: "100vw"
       }}
     >
-      {/* Responsive Navigation Bar */}
+      
       <nav
         style={{
           background: "#ef2b2d",
@@ -87,7 +86,7 @@ export default function ResponsiveLayout({ children }) {
           justifyContent: "space-between",
           position: "relative"
         }}>
-          {/* Logo */}
+       
           <div style={{
             fontSize: 28,
             fontWeight: 900,
@@ -118,7 +117,7 @@ export default function ResponsiveLayout({ children }) {
               of Hope
             </span>
           </div>
-          {/* Hamburger Icon */}
+       
           {isMobile && (
             <button
               aria-label="Open navigation"
@@ -140,7 +139,6 @@ export default function ResponsiveLayout({ children }) {
                 height: 28,
                 position: "relative"
               }}>
-                {/* Hamburger icon animation */}
                 <span style={{
                   position: "absolute",
                   top: 7,
@@ -177,7 +175,6 @@ export default function ResponsiveLayout({ children }) {
               </span>
             </button>
           )}
-          {/* Option Bar (Slide-in Menu) */}
           {isMobile ? (
             <div
               className="mobile-nav"
@@ -259,7 +256,6 @@ export default function ResponsiveLayout({ children }) {
           )}
         </div>
       </nav>
-      {/* Main Content Wrapper */}
       <div
         style={{
           maxWidth: isDesktop ? "1400px" : "100vw",
@@ -290,7 +286,6 @@ export default function ResponsiveLayout({ children }) {
           {children}
         </div>
       </div>
-      {/* Responsive CSS for all devices */}
       <style>
         {`
           html, body, #root, .responsive-root {
@@ -433,5 +428,3 @@ export default function ResponsiveLayout({ children }) {
   );
 }
 
-// Add this to your public/index.html head if not present:
-// <meta name="viewport" content="width=device-width, initial-scale=1.0">

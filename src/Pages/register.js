@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
+import Navbar from "../Navbar"; 
+import "../styles.css"; 
+=======
 
 const themeRed = "#ef2b2d";
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -41,7 +46,10 @@ export default function Register() {
     e.preventDefault();
     const newErrors = {};
 
+<<<<<<< HEAD
+=======
     // Basic validation
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
     if (!formData.fullName) newErrors.fullName = "Full Name is required.";
     if (!formData.email) newErrors.email = "Email is required.";
     if (!formData.phone) newErrors.phone = "Phone Number is required.";
@@ -58,11 +66,96 @@ export default function Register() {
 
     if (Object.keys(newErrors).length === 0) {
       console.log("Form submitted successfully:", formData);
+<<<<<<< HEAD
+      // TODO: API call here
+=======
       // Add API call or further processing here
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
     }
   };
 
   return (
+<<<<<<< HEAD
+    <>
+      <Navbar />
+      <div className="register-page page-container">   {/* ✅ updated wrapper */}
+        <div className="form-card">
+          <h2 className="form-title">Donor Registration</h2>
+
+          <form onSubmit={handleSubmit} className="form">
+            <input 
+              type="text" name="fullName" placeholder="Full Name"
+              value={formData.fullName} onChange={handleChange} className="form-input" 
+            />
+            {errors.fullName && <span className="error-text">{errors.fullName}</span>}
+
+            <input 
+              type="email" name="email" placeholder="Email Address"
+              value={formData.email} onChange={handleChange} className="form-input" 
+            />
+            {errors.email && <span className="error-text">{errors.email}</span>}
+
+            <input 
+              type="text" name="phone" placeholder="Phone Number"
+              value={formData.phone} onChange={handleChange} className="form-input" 
+            />
+            {errors.phone && <span className="error-text">{errors.phone}</span>}
+
+            <select 
+              name="bloodGroup" value={formData.bloodGroup} onChange={handleChange} className="form-input"
+            >
+              <option value="" disabled>Select Blood Group</option>
+              {bloodGroups.map((group) => (
+                <option key={group} value={group}>{group}</option>
+              ))}
+            </select>
+            {errors.bloodGroup && <span className="error-text">{errors.bloodGroup}</span>}
+
+            <select 
+              name="district" value={formData.district} onChange={handleChange} className="form-input"
+            >
+              <option value="" disabled>Select District</option>
+              {districts.map((d) => (
+                <option key={d} value={d}>{d}</option>
+              ))}
+            </select>
+            {errors.district && <span className="error-text">{errors.district}</span>}
+
+            <input 
+              type="date" name="dateOfBirth"
+              value={formData.dateOfBirth} onChange={handleChange} className="form-input" 
+            />
+            {errors.dateOfBirth && <span className="error-text">{errors.dateOfBirth}</span>}
+
+            {/* Gender */}
+            <div className="form-radio">
+              {["Male", "Female", "Other"].map((g) => (
+                <label key={g}>
+                  <input 
+                    type="radio" name="gender" value={g}
+                    checked={formData.gender === g} onChange={handleChange} 
+                  /> {g}
+                </label>
+              ))}
+            </div>
+            {errors.gender && <span className="error-text">{errors.gender}</span>}
+
+            <input 
+              type="password" name="password" placeholder="Password"
+              value={formData.password} onChange={handleChange} className="form-input" 
+            />
+            {errors.password && <span className="error-text">{errors.password}</span>}
+
+            <input 
+              type="password" name="confirmPassword" placeholder="Confirm Password"
+              value={formData.confirmPassword} onChange={handleChange} className="form-input" 
+            />
+            {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
+
+            <button type="submit" className="submit-btn">Register</button>
+          </form>
+        </div>
+=======
     <div style={{
       fontFamily: "Poppins, sans-serif",
       background: "linear-gradient(135deg, #fde2e2 0%, #ef2b2d 100%)",
@@ -245,10 +338,13 @@ export default function Register() {
 
           <button type="submit" style={submitBtnStyle}>Register</button>
         </form>
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
       </div>
-    </div>
+    </>
   );
 }
+<<<<<<< HEAD
+=======
 
 const inputStyle = {
   padding: "12px 16px",
@@ -279,3 +375,4 @@ const submitBtnStyle = {
   transition: "background 0.2s",
   boxShadow: "0 4px 16px 0 rgba(239,43,45,0.18)"
 };
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df

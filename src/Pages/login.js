@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ResponsiveLayout from "./responsiveLayout";
-import { gsap } from "gsap";
+import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
+import Navbar from "../Navbar";
+import "../styles.css";
 
+<<<<<<< HEAD
+=======
 const themeRed = "#ef2b2d";
 
 // Make sure to use named export if you are importing as { Login } elsewhere,
 // or default export if you are importing as Login elsewhere.
 // The following is a default export, so in your App.js or Router use:
 // import Login from "./Pages/login";
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,21 +20,7 @@ export default function Login() {
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [activeNav, setActiveNav] = useState("login");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    function handleClick(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [menuOpen]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -42,14 +32,36 @@ export default function Login() {
     if (!emailValid || !passwordValid) return;
 
     setLoading(true);
-
-    // Simulate login process
     setTimeout(() => {
       setLoading(false);
       navigate("/");
     }, 2000);
   };
 
+<<<<<<< HEAD
+  return (
+    <>
+      <Navbar />
+      <div className="login-page page-container">
+        <div className="form-card">
+          <h2 className="form-title">Log In</h2>
+
+          <form onSubmit={handleLogin} className="form">
+            {/* Email */}
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-input"
+            />
+            {invalidEmail && (
+              <span className="error-text">Please enter a valid email address.</span>
+            )}
+
+            {/* Password */}
+            <div className="password-wrapper">
+=======
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About Us", href: "/about" },
@@ -266,16 +278,26 @@ export default function Login() {
             </div>
             <div style={{ marginBottom: 20, width: "100%", position: "relative" }}>
               <label style={labelStyle}>Password</label>
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+<<<<<<< HEAD
+                className="form-input"
+=======
                 style={inputStyle}
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
+<<<<<<< HEAD
+                className="show-pass-btn"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+=======
                 style={{
                   position: "absolute",
                   right: 10,
@@ -303,13 +325,25 @@ export default function Login() {
                 }}
               >
                 <EyeIcon open={showPassword} />
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
               </button>
-              {invalidPassword && (
-                <div style={{ color: themeRed, marginTop: 6, fontSize: 14 }}>
-                  Password must be at least 8 characters.
-                </div>
-              )}
             </div>
+<<<<<<< HEAD
+            {invalidPassword && (
+              <span className="error-text">Password must be at least 8 characters.</span>
+            )}
+
+            {/* Remember Me */}
+            <div className="remember-me">
+              <input type="checkbox" id="remember" />
+              <label htmlFor="remember">Remember Me</label>
+            </div>
+
+            {/* Submit */}
+            <button type="submit" className="login-btn">
+              {loading ? "Logging in..." : "Log In"}
+            </button>
+=======
             <div style={{
               marginBottom: 20,
               display: "flex",
@@ -351,9 +385,55 @@ export default function Login() {
                 Create an account
               </a>
             </div>
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
           </form>
+
+          {/* Links */}
+          <div className="login-links">
+            <a href="/forgot-password">Forgot your password?</a>
+            <a href="/register">Create an account</a>
+          </div>
+
+          {/* Social login */}
+          <div className="social-login">
+            <p>Or log in with</p>
+            <div className="social-buttons">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-btn"
+                style={{ background: "#3b5998" }}
+              >
+                <FaFacebookF size={16} /> Facebook
+              </a>
+              <a
+                href="https://github.com/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-btn"
+                style={{ background: "#24292e" }}
+              >
+                <FaGithub size={16} /> GitHub
+              </a>
+              <a
+                href="https://accounts.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-btn"
+                style={{ background: "#db4437" }}
+              >
+                <FaGoogle size={16} /> Google
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+<<<<<<< HEAD
+    </>
+  );
+}
+=======
       {/* Responsive style for eye icon and input alignment */}
       <style>
         {`
@@ -386,3 +466,4 @@ export default function Login() {
   );
 }
 
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
