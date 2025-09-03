@@ -40,7 +40,11 @@ function useInView(threshold = 0.15) {
 }
 
 export default function Homepage() {
+<<<<<<< HEAD
   const searchDonorsRef = useRef(null); 
+=======
+  const searchDonorsRef = useRef(null); // Reference for the "Search Donors" section
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
 
   const scrollToSearchDonors = () => {
     if (searchDonorsRef.current) {
@@ -48,7 +52,11 @@ export default function Homepage() {
     }
   };
 
+<<<<<<< HEAD
 
+=======
+  // Animation hooks for each block
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
   const [smsRef, smsInView] = useInView();
   const [searchRef, searchInView] = useInView();
   const [networkRef, networkInView] = useInView();
@@ -79,6 +87,7 @@ export default function Homepage() {
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif", background: "#fff", minHeight: "100vh", overflowY: "auto" }}>
+<<<<<<< HEAD
     
       <Navbar />
       <div
@@ -94,6 +103,27 @@ export default function Homepage() {
         }}>
       <div style={{ position: "relative", zIndex: 3, maxWidth: 700, margin: "0 auto" }}>
            <h1 style={{
+=======
+      {/* Banner */}
+      <div style={{
+        position: "relative",
+        background: `url(${bannerBg}) center/cover no-repeat`,
+        minHeight: 420,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        textAlign: "center"
+      }}>
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "rgba(239,43,45,0.18)",
+          zIndex: 1
+        }} />
+        <div style={{ position: "relative", zIndex: 3, maxWidth: 700, margin: "0 auto" }}>
+          <h1 style={{
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
             fontSize: 38,
             fontWeight: 700,
             color: "#fff",
@@ -420,9 +450,17 @@ export default function Homepage() {
           `}
         </style>
       </div>
+<<<<<<< HEAD
       <div
         ref={searchDonorsRef} 
         data-search-donors 
+=======
+
+      {/* --- Search Donors Section --- */}
+      <div
+        ref={searchDonorsRef} // Attach the reference to the "Search Donors" section
+        data-search-donors // Add this attribute for navigation
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
         style={{
           width: "100%",
           background: "#fcfcfc",

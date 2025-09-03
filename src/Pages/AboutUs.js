@@ -1,15 +1,22 @@
 import React from "react";
 import { Mail, Phone } from "lucide-react";
+<<<<<<< HEAD
 import Navbar from "../Navbar"; 
+=======
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
 import "../styles.css";
 
 export default function AboutUs() {
   return (
     <div className="about-page">
+<<<<<<< HEAD
      
       <Navbar />
 
      
+=======
+      {/* Header Section */}
+>>>>>>> 8415801271a315c9e7ec1ca4aa6756e4153c89df
       <header className="about-header">
         <h1>About Us</h1>
         <p>Know about Pulse of Hope. What, how, and why.</p>
